@@ -1,0 +1,51 @@
+.matrix-font {
+    font-family: 'Courier New', monospace;
+    color: #0f0;
+    background-color: #000;
+}
+
+.code-rain-animation {
+    color: #0f0;
+    background-color: rgba(0, 0, 0, 0);
+    background-size: auto;
+    animation: rain 10s infinite linear;
+}
+
+@keyframes rain {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* style.css */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 1);
+    overflow: scroll;
+}
+
+canvas {
+    display: block;
+    background-color: #000;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    margin: 10vh 0 0;
+    /* Ensure content starts below the canvas */
+    padding: 20px;
+    /* Add some padding for better visibility */
+}
