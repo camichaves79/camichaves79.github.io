@@ -6,59 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Backend Developer Portfolio - Matrix Aesthetics</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        .matrix-font {
-            font-family: 'Courier New', monospace;
-            color: #0f0;
-            background-color: #000;
-        }
-
-        .code-rain-animation {
-            color: #0f0;
-            background-color: rgba(0, 0, 0, 0);
-            background-size: auto;
-            animation: rain 10s infinite linear;
-        }
-
-        @keyframes rain {
-            0% {
-                background-position: 0 0;
-            }
-
-            100% {
-                background-position: 100% 100%;
-            }
-        }
-
-        /* style.css */
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            background-color: rgba(0, 0, 0, 1);
-            overflow: scroll;
-        }
-
-        canvas {
-            display: block;
-            background-color: #000;
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        .content {
-            position: relative;
-            z-index: 1;
-            margin: 10vh 0 0;
-            /* Ensure content starts below the canvas */
-            padding: 20px;
-            /* Add some padding for better visibility */
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body class="matrix-font">
@@ -66,8 +14,8 @@
         <canvas id="q">
         </canvas>
         <div class="min-h-screen flex flex-col items-center justify-center code-rain-animation">
-            <h1 class="text-5xl font-bold mb-2">Camilo Chaves</h1>
-            <p class="text-lg mb-5">Backend Web Developer</p>
+            <h1 class="text-5xl font-bold mb-2 text-center">Camilo Chaves</h1>
+            <h2 class="text-lg mb-5 text-center">Backend Web Developer</h2>
             <div class="text-center space-y-4">
                 <p>Welcome to my digital realm. Here's a glimpse into my backend development work.</p>
                 <div>
@@ -80,26 +28,160 @@
         </div>
 
         <section id="projects" class="py-20">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12">Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Repeat this block for each project -->
-                    <div class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-50">
-                        <h3 class="text-xl font-bold mb-2">Project Name</h3>
-                        <p class="text-gray-300">Project description. An in-depth look at my work and the technologies
-                            I've
-                            harnessed.</p>
-                        <a href="#"
-                            class="inline-block mt-4 bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">View
-                            Project</a>
+            <!-- Existing project section -->
+            <div class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-50">
+                <h3 class="text-xl font-bold mb-2">Knowkee (mobile app)</h3>
+                <p class="text-gray-300">
+                    A digital wallet for you to store and share your life achievements.
+                </p>
+                <div class="dropdown inline-block mt-4">
+                    <div id="knowkee-dropdown" class="dropdown-content hidden text-gray-300 mt-2">
+                        <!-- Add detailed project information here -->
+                        <p>Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit. Nam in bibendum turpis, sed pellentesque turpis. Aenean auctor
+                            erat
+                            nisl, nec dictum risus imperdiet eu. In ut ipsum et massa faucibus bibendum ac in justo.
+                            Fusce ac
+                            lorem vitae dui pharetra dapibus non ut leo. Sed eu sagittis quam. Pellentesque non lacus
+                            neque.
+                            Curabitur lectus leo, vulputate ut felis eget, feugiat gravida metus. Suspendisse in
+                            tincidunt enim,
+                            at feugiat arcu. Sed imperdiet a ligula quis tempor. In finibus molestie rhoncus. Nulla
+                            facilisi.
+                            Mauris luctus purus non vehicula posuere. Curabitur tellus tellus, pretium eget accumsan
+                            varius,
+                            aliquam ac leo. Ut et quam ac tortor luctus malesuada. Cras tincidunt molestie iaculis.
+
+                            Duis bibendum urna a placerat molestie. In at nulla sapien. Pellentesque aliquam augue sed
+                            aliquet
+                            finibus. Donec sed egestas sem. Donec consectetur, erat a varius tristique, mi eros molestie
+                            sem,
+                            consequat interdum leo nisl quis mauris. Pellentesque volutpat nibh vel arcu cursus, cursus
+                            auctor
+                            turpis pellentesque. Praesent blandit magna a nisi iaculis tempus. Quisque rhoncus ipsum
+                            nunc, vitae
+                            tristique est pellentesque in. Maecenas sed sem sit amet sem ornare pellentesque. In hac
+                            habitasse
+                            platea dictumst. Nulla ut elit enim. In tincidunt urna blandit pulvinar tincidunt. Aliquam
+                            lobortis,
+                            mi in euismod consectetur, est nunc egestas urna, ultricies fringilla lorem nisl sit amet
+                            tortor.
+                            Integer odio sapien, ornare non volutpat id, volutpat sed mi. Nunc iaculis eu mi id maximus.
+                        </p>
                     </div>
-                    <!-- End of project block -->
+                    <button onclick="toggleDropdown('knowkee')"
+                        class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
+                        Show Details
+                    </button>
                 </div>
             </div>
+            <!-- End of modified project block -->
+            <!-- Existing project section -->
+            <div class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-50">
+                <h3 class="text-xl font-bold mb-2">SmartPass</h3>
+                <p class="text-gray-300">
+                    A user authentication API
+                </p>
+                <div class="dropdown inline-block mt-4">
+                    <div id="smartpass-dropdown" class="dropdown-content hidden text-gray-300 mt-2">
+                        <!-- Add detailed project information here -->
+                        <p>Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit. Nam in bibendum turpis, sed pellentesque turpis. Aenean auctor
+                            erat
+                            nisl, nec dictum risus imperdiet eu. In ut ipsum et massa faucibus bibendum ac in justo.
+                            Fusce ac
+                            lorem vitae dui pharetra dapibus non ut leo. Sed eu sagittis quam. Pellentesque non lacus
+                            neque.
+                            Curabitur lectus leo, vulputate ut felis eget, feugiat gravida metus. Suspendisse in
+                            tincidunt enim,
+                            at feugiat arcu. Sed imperdiet a ligula quis tempor. In finibus molestie rhoncus. Nulla
+                            facilisi.
+                            Mauris luctus purus non vehicula posuere. Curabitur tellus tellus, pretium eget accumsan
+                            varius,
+                            aliquam ac leo. Ut et quam ac tortor luctus malesuada. Cras tincidunt molestie iaculis.
+
+                            Duis bibendum urna a placerat molestie. In at nulla sapien. Pellentesque aliquam augue sed
+                            aliquet
+                            finibus. Donec sed egestas sem. Donec consectetur, erat a varius tristique, mi eros molestie
+                            sem,
+                            consequat interdum leo nisl quis mauris. Pellentesque volutpat nibh vel arcu cursus, cursus
+                            auctor
+                            turpis pellentesque. Praesent blandit magna a nisi iaculis tempus. Quisque rhoncus ipsum
+                            nunc, vitae
+                            tristique est pellentesque in. Maecenas sed sem sit amet sem ornare pellentesque. In hac
+                            habitasse
+                            platea dictumst. Nulla ut elit enim. In tincidunt urna blandit pulvinar tincidunt. Aliquam
+                            lobortis,
+                            mi in euismod consectetur, est nunc egestas urna, ultricies fringilla lorem nisl sit amet
+                            tortor.
+                            Integer odio sapien, ornare non volutpat id, volutpat sed mi. Nunc iaculis eu mi id maximus.
+                        </p>
+                    </div>
+                    <button onclick="toggleDropdown('smartpass')"
+                        class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
+                        Show Details
+                    </button>
+                </div>
+            </div>
+            <div class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-50">
+                <h3 class="text-xl font-bold mb-2">Email campaign ETL</h3>
+                <p class="text-gray-300">
+                    An email event data streaming ETL pipeline
+                </p>
+                <div class="dropdown inline-block mt-4">
+                    <div id="email-dropdown" class="dropdown-content hidden text-gray-300 mt-2">
+                        <!-- Add detailed project information here -->
+                        <p>Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit. Nam in bibendum turpis, sed pellentesque turpis. Aenean
+                            auctor
+                            erat
+                            nisl, nec dictum risus imperdiet eu. In ut ipsum et massa faucibus bibendum ac in justo.
+                            Fusce ac
+                            lorem vitae dui pharetra dapibus non ut leo. Sed eu sagittis quam. Pellentesque non
+                            lacus
+                            neque.
+                            Curabitur lectus leo, vulputate ut felis eget, feugiat gravida metus. Suspendisse in
+                            tincidunt enim,
+                            at feugiat arcu. Sed imperdiet a ligula quis tempor. In finibus molestie rhoncus. Nulla
+                            facilisi.
+                            Mauris luctus purus non vehicula posuere. Curabitur tellus tellus, pretium eget accumsan
+                            varius,
+                            aliquam ac leo. Ut et quam ac tortor luctus malesuada. Cras tincidunt molestie iaculis.
+
+                            Duis bibendum urna a placerat molestie. In at nulla sapien. Pellentesque aliquam augue
+                            sed
+                            aliquet
+                            finibus. Donec sed egestas sem. Donec consectetur, erat a varius tristique, mi eros
+                            molestie
+                            sem,
+                            consequat interdum leo nisl quis mauris. Pellentesque volutpat nibh vel arcu cursus,
+                            cursus
+                            auctor
+                            turpis pellentesque. Praesent blandit magna a nisi iaculis tempus. Quisque rhoncus ipsum
+                            nunc, vitae
+                            tristique est pellentesque in. Maecenas sed sem sit amet sem ornare pellentesque. In hac
+                            habitasse
+                            platea dictumst. Nulla ut elit enim. In tincidunt urna blandit pulvinar tincidunt.
+                            Aliquam
+                            lobortis,
+                            mi in euismod consectetur, est nunc egestas urna, ultricies fringilla lorem nisl sit
+                            amet
+                            tortor.
+                            Integer odio sapien, ornare non volutpat id, volutpat sed mi. Nunc iaculis eu mi id
+                            maximus.
+                        </p>
+                    </div>
+                    <button onclick="toggleDropdown('email')"
+                        class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
+                        Show Details
+                    </button>
+                </div>
+            </div>
+
         </section>
     </div>
     <script>
-        
+
         var s = window.screen;
         var width = q.width = s.width;
         var height = q.height = s.height;
@@ -155,12 +237,16 @@
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             });
         });
-        window.onload = function() {
+        window.onload = function () {
             window.scroll({
                 top: 0,
                 left: 0,
                 behavior: 'smooth' // You can use 'auto' instead of 'smooth' for an instant scroll
             });
+        };
+        function toggleDropdown(projectId) {
+            var dropdown = document.getElementById(projectId + '-dropdown');
+            dropdown.classList.toggle("hidden");
         };
     </script>
 
