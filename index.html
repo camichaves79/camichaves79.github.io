@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,82 +15,193 @@
 
         .code-rain-animation {
             color: #0f0;
-            background-color: #000;
+            background-color: rgba(0, 0, 0, 0);
             background-size: auto;
             animation: rain 10s infinite linear;
         }
 
         @keyframes rain {
-            0% {background-position: 0 0;}
-            100% {background-position: 100% 100%;}
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        /* style.css */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 1);
+            overflow: scroll;
+        }
+
+        canvas {
+            display: block;
+            background-color: #000;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            margin: 100vh 0 0;
+            /* Ensure content starts below the canvas */
+            padding: 20px;
+            /* Add some padding for better visibility */
         }
     </style>
 </head>
+
 <body class="matrix-font">
-
-<div class="min-h-screen flex flex-col items-center justify-center code-rain-animation">
-    <h1 class="text-5xl font-bold mb-2">John Doe</h1>
-    <p class="text-lg mb-5">Backend Web Developer</p>
-    <div class="text-center space-y-4">
-        <p>Welcome to my digital realm. Here's a glimpse into my backend development universe.</p>
-        <div>
-            <a href="#projects" class="px-4 py-2 bg-green-700 hover:bg-green-800 transition-colors rounded">Projects</a>
-            <a href="#contact" class="px-4 py-2 bg-green-700 hover:bg-green-800 transition-colors rounded">Contact</a>
+    <div class="content">
+        <canvas id="q">
+        </canvas>
+        <div class="min-h-screen flex flex-col items-center justify-center code-rain-animation">
+            <h1 class="text-5xl font-bold mb-2">John Doe</h1>
+            <p class="text-lg mb-5">Backend Web Developer</p>
+            <div class="text-center space-y-4">
+                <p>Welcome to my digital realm. Here's a glimpse into my backend development universe.</p>
+                <div>
+                    <a href="#projects"
+                        class="px-4 py-2 bg-green-700 hover:bg-green-800 transition-colors rounded">Projects</a>
+                    <a href="#contact"
+                        class="px-4 py-2 bg-green-700 hover:bg-green-800 transition-colors rounded">Contact</a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<section id="projects" class="py-20">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Repeat this block for each project -->
-            <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-bold mb-2">Project Name</h3>
-                <p class="text-gray-300">Project description. An in-depth look at my work and the technologies I've harnessed.</p>
-                <a href="#" class="inline-block mt-4 bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">View Project</a>
+        <section id="projects" class="py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Repeat this block for each project -->
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-50">
+                        <h3 class="text-xl font-bold mb-2">Project Name</h3>
+                        <p class="text-gray-300">Project description. An in-depth look at my work and the technologies
+                            I've
+                            harnessed.</p>
+                        <a href="#"
+                            class="inline-block mt-4 bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">View
+                            Project</a>
+                    </div>
+                    <!-- End of project block -->
+                </div>
             </div>
-            <!-- End of project block -->
-        </div>
-    </div>
-</section>
+        </section>
 
-<section id="contact" class="py-20 bg-gray-800 text-white">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Contact</h2>
-        <form class="w-full max-w-lg mx-auto">
-            <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="name">
-                        Name
-                    </label>
-                    <input class="appearance-none block w-full bg-gray-900 text-white border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-700" id="name" type="text">
-                </div>
+        <section id="contact" class="py-20 bg-gray-900 text-white bg-opacity-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Contact</h2>
+                <form class="w-full max-w-lg mx-auto">
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3">
+                            <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="name">
+                                Name
+                            </label>
+                            <input
+                                class="appearance-none block w-full bg-gray-900 text-white border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-700"
+                                id="name" type="text">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3">
+                            <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="email">
+                                Email
+                            </label>
+                            <input
+                                class="appearance-none block w-full bg-gray-900 text-white border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-700"
+                                id="email" type="email">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3">
+                            <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="message">
+                                Message
+                            </label>
+                            <textarea
+                                class="appearance-none block w-full bg-gray-900 text-white border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-700"
+                                id="message" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3 text-center">
+                            <button
+                                class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded transition-colors"
+                                type="submit">Send Message</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="email">
-                        Email
-                    </label>
-                    <input class="appearance-none block w-full bg-gray-900 text-white border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-700" id="email" type="email">
-                </div>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="message">
-                        Message
-                    </label>
-                    <textarea class="appearance-none block w-full bg-gray-900 text-white border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-700" id="message" rows="5"></textarea>
-                </div>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3 text-center">
-                    <button class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded transition-colors" type="submit">Send Message</button>
-                </div>
-            </div>
-        </form>
+        </section>
     </div>
-</section>
+    <script>
+        var s = window.screen;
+        var width = q.width = s.width;
+        var height = q.height = s.height;
+        var letters = Array(256).join(1).split('');
+
+        var startTime = Date.now(); // Record the start time
+        var duration = 60000; // Duration of the color transition in milliseconds
+
+        var draw = function () {
+            var currentTime = Date.now();
+            var elapsedTime = currentTime - startTime;
+            var fraction = Math.min(elapsedTime / duration, 1); // Calculate the fraction of the transition completed
+
+            // Interpolate the green color component from 255 to 0
+            var greenValue = Math.floor(255 * (1 - fraction));
+            var color = `rgb(0, ${greenValue}, 0)`; // Construct the color string
+
+            q.getContext('2d').fillStyle = 'rgba(0,0,0,.05)';
+            q.getContext('2d').fillRect(0, 0, width, height);
+            q.getContext('2d').fillStyle = color; // Use the interpolated color
+
+            letters.map(function (y_pos, index) {
+                text = String.fromCharCode(3e4 + Math.random() * 33);
+                x_pos = index * 10;
+                q.getContext('2d').fillText(text, x_pos, y_pos);
+                letters[index] = (y_pos > 758 + Math.random() * 1e4) ? 0 : y_pos + 10;
+            });
+
+            if (fraction === 1) clearInterval(intervalId); // Optionally stop the interval when the transition is complete
+        };
+
+        var intervalId = setInterval(draw, 33);
+
+        // Optionally, you can still use setTimeout to clear the interval after 10 seconds or after the color transition completes
+        setTimeout(function () {
+            clearInterval(intervalId);
+        }, duration);
+        // script.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('canvasBackground');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            ctx.fillStyle = '#3498db'; // Example: solid color fill
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                ctx.fillStyle = '#3498db';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            });
+        });
+
+    </script>
 
 </body>
+
 </html>
