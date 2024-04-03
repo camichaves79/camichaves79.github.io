@@ -71,11 +71,15 @@
             <h2 class="text-lg mb-5 text-center">Backend Web Developer</h2>
             <div class="text-center space-y-4">
                 <p>Welcome to my digital realm. Here's a glimpse into my backend development reality.</p>
-                <div>
-                    <a href="#projects"
-                        class="px-4 py-2 bg-green-700 hover:bg-green-800 transition-colors rounded">Projects</a>
-                    <a href="#connect"
-                        class="px-4 py-2 bg-green-700 hover:bg-green-800 transition-colors rounded">Connect</a>
+                <div class="flex flex-wrap justify-center content-center p-4">
+                    <div class="m-1 p-2">
+                        <a href="#projects"
+                            class="px-4 py-2 bg-green-700 hover:bg-green-800 transition-colors rounded my-5">Projects</a>
+                    </div>
+                    <div class="m-1 p-2">
+                        <a href="#connect"
+                            class="px-4 py-2 bg-green-700 hover:bg-green-800 transition-colors rounded">Connect</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -340,33 +344,33 @@
         <section id="connect">
             <h4 class="text-3xl mb-8 text-center">Connect with Me</h4>
 
-            <div class="flex flex-wrap justify-center space-x-4">
+            <div class="flex flex-wrap justify-around space-x-4">
                 <div class="profile-link p-2">
                     <a href="http://www.linkedin.com/in/camilochavesdeveloper" target="_blank"
                         class="flex items-center no-underline hover:underline">
                         <img src="LI-In-Bug-green.png" alt="LinkedIn Icon" class="w-6 h-6 mr-2 text-green-500">
-                        LinkedIn
+                        <pre>LinkedIn</pre>
                     </a>
                 </div>
-                <div class="profile-link p-2">
+                <div class="profile-link p-2 justify-start">
                     <a href="https://github.com/camichaves79" target="_blank"
                         class="flex items-center no-underline hover:underline">
                         <img src="github-mark-green.png" alt="GitHub Icon" class="w-6 h-6 mr-2 text-green-500">
-                        GitHub
+                        <pre>GitHub</pre>
                     </a>
                 </div>
                 <div class="profile-link p-2">
                     <a href="https://x.com/CamiloChavesH79" target="_blank"
                         class="flex items-center no-underline hover:underline">
                         <img src="X_logo_2023_original.png" alt="Twitter Icon" class="w-6 h-6 mr-2 text-green-500">
-                        Twitter
+                        <pre>Twitter</pre>
                     </a>
                 </div>
                 <div class="profile-link p-2">
                     <a href="mailto:camilo.chaves.h@gmail.com" target="_blank"
                         class="flex items-center no-underline hover:underline">
                         <img src="at.png" alt="Email Icon" class="w-6 h-6 mr-2 text-green-500">
-                        Email Me
+                        <pre>Email Me</pre>
                     </a>
                 </div>
             </div>
@@ -440,7 +444,7 @@
         function toggleDropdown(projectId) {
             var dropdown = document.getElementById(projectId + '-dropdown');
             var button = document.getElementById(projectId + 'Id');
-            if (button.innerText === 'Show Details'){
+            if (button.innerText === 'Show Details') {
                 button.innerText = 'Hide Details'
             }
             else {
