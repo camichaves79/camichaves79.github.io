@@ -85,8 +85,8 @@
             </div>
         </div>
 
-        <section id="projects" class="py-20">
-            <div class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5">
+        <section id="projects" class="py-20 grid grid-columns-1">
+            <div id="knowkee-project" class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5 lg:mx-15">
                 <h3 class="text-xl font-bold mb-2">Knowkee (mobile app)</h3>
                 <h4 class="text-gray-300">
                     A digital wallet for you to store and share your life achievements, available on the Play Store and
@@ -165,13 +165,15 @@
                                     <br>
                                 </p>
                             </div>
-                            <button id="knowkeeId" onclick="toggleDropdown('knowkee')"
-                                class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
-                                Show Details
-                            </button>
+                            <a href="#knowkee-project">
+                                <button id="knowkeeId" onclick="toggleDropdown('knowkee')"
+                                    class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
+                                    Show Details
+                                </button>
+                            </a>
                         </div>
             </div>
-            <div class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5">
+            <div id="smartpass-project" class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5">
                 <h3 class="text-xl font-bold mb-2">SmartPass</h3>
                 <p class="text-gray-300">
                     A user authentication API now being offered commercially as SaaS
@@ -223,13 +225,15 @@
                             <br>
                         </p>
                     </div>
-                    <button id="smartpassId" onclick="toggleDropdown('smartpass')"
-                        class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
-                        Show Details
-                    </button>
+                    <a href="#smartpass-project">
+                        <button id="smartpassId" onclick="toggleDropdown('smartpass')"
+                            class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
+                            Show Details
+                        </button>
+                    </a>
                 </div>
             </div>
-            <div class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5">
+            <div id="email-etl-project" class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5">
                 <h3 class="text-xl font-bold mb-2">Email campaign ETL</h3>
                 <p class="text-gray-300">
                     An email event data streaming ETL pipeline providing business insights for marketing email campaigns
@@ -292,13 +296,15 @@
                         <br>
                         </p>
                     </div>
-                    <button id="emailId" onclick="toggleDropdown('email')"
-                        class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
-                        Show Details
-                    </button>
+                    <a href="#email-etl-project">
+                        <button id="emailId" onclick="toggleDropdown('email')"
+                            class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
+                            Show Details
+                        </button>
+                    </a>
                 </div>
             </div>
-            <div class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5">
+            <div id="kme360-project" class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5">
                 <h3 class="text-xl font-bold mb-2">KME360</h3>
                 <p class="text-gray-300">
                     A Learning Management Experience Saas Web App commercially used by big companies
@@ -334,18 +340,20 @@
                         <br>
                         </p>
                     </div>
-                    <button id="kmeId" onclick="toggleDropdown('kme')"
-                        class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
-                        Show Details
-                    </button>
+                    <a href="#kme360-project">
+                        <button id="kmeId" onclick="toggleDropdown('kme')"
+                            class="bg-green-600 hover:bg-green-700 transition-colors text-white py-2 px-4 rounded">
+                            Show Details
+                        </button>
+                    </a>
                 </div>
             </div>
 
         </section>
         <section id="connect">
-            <h1 class="text-3xl font-bold mb-2 text-center">Connect with Me</h1>
+            <pre><h1 class="text-3xl font-bold mb-2 text-center">Connect with me!</h1></pre>
 
-            <div class="flex flex-wrap justify-evenly space-x-4">
+            <div class="flex flex-wrap justify-center space-x-4">
                 <div class="profile-link p-2">
                     <a href="http://www.linkedin.com/in/camilochavesdeveloper" target="_blank" rel="noopener noreferrer"
                         class="flex items-center no-underline hover:underline">
