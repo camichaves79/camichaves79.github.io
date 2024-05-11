@@ -7,121 +7,19 @@
     <title>Camilo Chaves Backend Developer Portfolio</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        .matrix-font {
-            font-family: 'Courier New', monospace;
-            color: #0f0;
-            background-color: #000;
-        }
-
-        .code-rain-animation {
-            color: rgb(23, 204, 23);
-            background-color: rgba(0, 0, 0, 0);
-            background-size: auto;
-            animation: rain 10s infinite linear;
-        }
-
-        @keyframes rain {
-            0% {
-                background-position: 0 0;
-            }
-
-            100% {
-                background-position: 100% 100%;
-            }
-        }
-
-        /* style.css */
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            background-color: rgba(0, 0, 0, 1);
-            overflow: scroll;
-            scroll-behavior: smooth;
-        }
-
-        canvas {
-            display: block;
-            background-color: #000;
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        .content {
-            position: relative;
-            z-index: 1;
-            margin: 0;
-            /* Ensure content starts below the canvas */
-            /* Add some padding for better visibility */
-        }
-
-        .glass {
-            backdrop-filter: blur(5px);
-            border-radius: 8px;
-            padding: 40px 60px 20px 60px;
-            background-color: rgba(19, 39, 17, 0.7);
-        }
-
-        .glass h2 {
-            color: #d0c700;
-        }
-
-        .bg-gray-900 {
-            background-color: rgba(19, 39, 17, .7);
-        }
-
-        .text-gray-300 {
-            color: #b5c7b4;
-        }
-
-        .main-card-description {
-            color: #b5c7b4;
-        }
-
-        .main-card-button a {
-            background-color: #04781266;
-        }
-
-        .main-card-wrapper {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .cami-btn {
-            cursor: pointer;
-            background-color: #04781266;
-            border-radius: .25rem;
-            padding: .5rem 1rem;
-        }
-
-        .cami-btn:hover {
-            background-color: #04781290;
-        }
-
-        @media only screen and (max-width: 768px) {
-            .main-card-wrapper h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./styles/custom.css">
 </head>
 
 <body class="matrix-font">
     <div class="content">
         <canvas id="q">
         </canvas>
+        <div id="vignette"></div>
         <div class="min-h-screen flex flex-col items-center justify-center code-rain-animation">
             <div class="main-card-wrapper">
-                <div class="glass">
+                <div class="glass main-card">
                     <h1 class="text-5xl font-bold mb-2 text-center">Camilo Chaves</h1>
-                    <h2 class="text-lg mb-5 text-center"><strong>Backend Web Developer</strong></h2>
+                    <h2 class="text-lg mb-5 text-center">Backend Web Developer</h2>
                     <div class="text-center space-y-4">
                         <div class="main-card-description">
                             <div>Welcome to my digital realm.</div>
@@ -141,7 +39,7 @@
             </div>
 
             <section id="projects" class="py-20 grid grid-columns-1">
-                <div id="knowkee-project" class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5 lg:mx-15">
+                <div id="knowkee-project" class="glass glass-padding">
                     <h3 class="text-xl font-bold mb-2">Knowkee (mobile app)</h3>
                     <h4 class="text-gray-300">
                         A digital wallet for you to store and share your life achievements, available on the Play Store
@@ -246,7 +144,7 @@
                                 </a>
                             </div>
                 </div>
-                <div id="smartpass-project" class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5">
+                <div id="smartpass-project" class="glass glass-padding">
                     <h3 class="text-xl font-bold mb-2">SmartPass</h3>
                     <p class="text-gray-300">
                         A user authentication API now being offered commercially as SaaS
@@ -319,7 +217,7 @@
                         </a>
                     </div>
                 </div>
-                <div id="email-etl-project" class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5">
+                <div id="email-etl-project" class="glass glass-padding">
                     <h3 class="text-xl font-bold mb-2">Email campaign ETL</h3>
                     <p class="text-gray-300">
                         An email event data streaming ETL pipeline providing business insights for marketing email
@@ -405,7 +303,7 @@
                         </a>
                     </div>
                 </div>
-                <div id="kme360-project" class="bg-gray-900 p-6 rounded-lg shadow-lg bg-opacity-85 my-5">
+                <div id="kme360-project" class="glass glass-padding">
                     <h3 class="text-xl font-bold mb-2">KME360</h3>
                     <p class="text-gray-300">
                         A Learning Management Experience Saas Web App commercially used by big companies
@@ -458,9 +356,8 @@
                 </div>
 
             </section>
-            <section id="connect" class="py-20">
-                <pre><h1 class="text-3xl font-bold mb-2 text-center">Connect with me</h1></pre>
-
+            <footer id="connect">
+                <h1 class="text-3xl font-bold mb-2 text-center">Connect with me</h1>
                 <div class="flex flex-wrap justify-center space-x-4">
                     <div class="profile-link p-2">
                         <a href="http://www.linkedin.com/in/camilochavesdeveloper" target="_blank"
@@ -492,84 +389,9 @@
                     </div>
                 </div>
 
-            </section>
+            </footer>
         </div>
-        <script>
-
-            var s = window.screen;
-            var width = q.width = s.width;
-            var height = q.height = s.height;
-            var letters = Array(256).join(1).split('');
-
-            var startTime = Date.now(); // Record the start time
-            var duration = 60000; // Duration of the color transition in milliseconds
-
-            var draw = function () {
-                var currentTime = Date.now();
-                var elapsedTime = currentTime - startTime;
-                var fraction = Math.min(elapsedTime / duration, 1); // Calculate the fraction of the transition completed
-
-                // Interpolate the green color component from 255 to 0
-                var greenValue = Math.floor(200 * (1 - fraction));
-                var color = `rgb(0, ${greenValue}, 0)`; // Construct the color string
-
-                q.getContext('2d').fillStyle = 'rgba(0,0,0,.05)';
-                q.getContext('2d').fillRect(0, 0, width, height);
-                q.getContext('2d').fillStyle = color; // Use the interpolated color
-
-                letters.map(function (y_pos, index) {
-                    text = String.fromCharCode(3e4 + Math.random() * 33);
-                    x_pos = index * 10;
-                    q.getContext('2d').fillText(text, x_pos, y_pos);
-                    letters[index] = (y_pos > 758 + Math.random() * 1e4) ? 0 : y_pos + 10;
-                });
-
-                if (fraction === 1) clearInterval(intervalId); // Optionally stop the interval when the transition is complete
-            };
-
-            var intervalId = setInterval(draw, 33);
-
-            // Optionally, you can still use setTimeout to clear the interval after 10 seconds or after the color transition completes
-            setTimeout(function () {
-                clearInterval(intervalId);
-            }, duration);
-            // script.js
-            document.addEventListener('DOMContentLoaded', () => {
-                const canvas = document.getElementById('canvasBackground');
-                const ctx = canvas.getContext('2d');
-
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-
-                ctx.fillStyle = '#3498db'; // Example: solid color fill
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                window.addEventListener('resize', () => {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                    ctx.fillStyle = '#3498db';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                });
-            });
-            window.onload = function () {
-                window.scroll({
-                    top: 0,
-                    left: 0,
-                    behavior: 'smooth' // You can use 'auto' instead of 'smooth' for an instant scroll
-                });
-            };
-            function toggleDropdown(projectId) {
-                var dropdown = document.getElementById(projectId + '-dropdown');
-                var button = document.getElementById(projectId + 'Id');
-                if (button.innerText === 'Show Details') {
-                    button.innerText = 'Hide Details'
-                }
-                else {
-                    button.innerText = "Show Details"
-                }
-                dropdown.classList.toggle("hidden");
-            };
-        </script>
+        <script src="./javascript/main.js" type="application/javascript"></script>
 </body>
 
 </html>

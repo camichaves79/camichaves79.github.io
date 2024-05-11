@@ -1,0 +1,139 @@
+.matrix-font {
+    font-family: 'Courier New', monospace;
+    color: #0f0;
+    background-color: #000;
+}
+
+.code-rain-animation {
+    color: rgb(23, 204, 23);
+    background-color: rgba(0, 0, 0, 0);
+    background-size: auto;
+    animation: rain 10s infinite linear;
+}
+
+@keyframes rain {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* style.css */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 1);
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+canvas {
+    display: block;
+    background-color: #000;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    /* Ensure content starts below the canvas */
+    /* Add some padding for better visibility */
+}
+
+.glass {
+    backdrop-filter: blur(5px);
+    border-radius: 8px;
+    background-color: rgba(19, 39, 17, 0.7);
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.glass h2 {
+    color: #d0c700;
+}
+
+.glass-padding {
+    padding: 1.5rem;
+}
+
+.blurred-bg {
+    transition: all 5s ease-in;
+    backdrop-filter: blur(1px);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.bg-gray-900 {
+    background-color: rgba(19, 39, 17, .7);
+}
+
+.text-gray-300 {
+    color: #b5c7b4;
+}
+
+.main-card-description {
+    color: #b5c7b4;
+}
+
+.main-card-button a {
+    background-color: #04781266;
+}
+
+.main-card-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-card {
+    padding: 40px 60px 20px 60px;
+}
+
+.cami-btn {
+    cursor: pointer;
+    background-color: #04781266;
+    border-radius: .25rem;
+    padding: .5rem 1rem;
+}
+
+.cami-btn:hover {
+    background-color: #04781290;
+}
+
+#connect {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(19, 39, 17, .7);
+    padding: 2rem 3rem 4rem 3rem;
+}
+
+#vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
+}
+
+footer {
+    z-index: 10;
+}
+
+/* ALL MEDIA QUERIES AT THE BOTTOM OF THE FILE */
+@media only screen and (max-width: 768px) {
+    .main-card-wrapper h1 {
+        font-size: 2rem;
+    }
+}
