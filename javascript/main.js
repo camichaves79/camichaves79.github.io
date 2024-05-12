@@ -69,7 +69,7 @@ function blurrBg() {
 
 window.onload = function () {
     initScroll();
-    setTimeout(blurrBg, 5000);
+    setTimeout(blurrBg, 8000);
 };
 function toggleDropdown(projectId) {
     var dropdown = document.getElementById(projectId + '-dropdown');
