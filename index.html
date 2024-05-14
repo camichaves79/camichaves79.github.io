@@ -59,25 +59,25 @@
                                 backend
                                 language, orchestrating the interaction between various services. DocumentDB and
                                 DynamoDB
-                                were employed as NoSQL databases, offering flexible data storage. The system's
+                                were employed as NoSQL databases, offering flexible data storage. <br><br> The system's
                                 gateway to
                                 the outside world was managed by Amazon API Gateway, which seamlessly connected
                                 with
                                 AWS
-                                Lambda, facilitating serverless compute functionality. Email communication was
+                                Lambda, facilitating serverless compute functionality. <br><br>Email communication was
                                 streamlined
                                 through AWS Simple Email Service (SES), while Simple Notification Service (SNS)
                                 handled
-                                messaging. User authentication and management were delegated to Amazon Cognito.
+                                messaging. <br><br>User authentication and management were delegated to Amazon Cognito.
                                 REST
                                 and
-                                HTTP APIs enabled smooth communication between components. The React Native app,
+                                HTTP APIs enabled smooth communication between components. <br><br>The React Native app,
                                 coded in
-                                Typescript, served as the dynamic and responsive frontend. Version control was
+                                Typescript, served as the dynamic and responsive frontend. <br><br> Version control was
                                 managed using
                                 CodeCommit/git, while AWS SAM and CloudFormation simplified serverless
                                 application
-                                deployment. JSON Web Tokens (JWT) secured communication, and third-party APIs
+                                deployment. <br><br>JSON Web Tokens (JWT) secured communication, and third-party APIs
                                 expanded the
                                 system's capabilities, creating a robust, scalable, and versatile technological
                                 ecosystem.<br>
@@ -95,7 +95,7 @@
                                 functional digital wallet system. This system should enable users to securely
                                 store
                                 and share various life achievements, encompassing educational certificates, work
-                                history, recommendations, and badges. The primary objective is to create a
+                                history, recommendations, and badges. <br><br>The primary objective is to create a
                                 robust
                                 and user-friendly mobile application that effectively manages and facilitates
                                 the
@@ -107,25 +107,25 @@
                                 solution was implemented, centered
                                 around a REST API designed to manage the creation, reception, storage, and
                                 retrieval
-                                of credentials. These credentials were verified by a third-party Internet of
+                                of credentials. <br><br>These credentials were verified by a third-party Internet of
                                 Credentials provider. The primary databases employed in this solution were NoSQL
                                 databases, chosen for their flexibility and scalability, as well as for the
-                                compatibility with the ceredentials data format.
+                                compatibility with the ceredentials data format. <br><br>
 
                                 Proper encryption measures were implemented both at rest and in transit to
                                 ensure
                                 the security of sensitive data. The handling, transformation, and presentation
                                 of
                                 various credential types were standardized using the JSON format, providing a
-                                structured and interoperable data format.
+                                structured and interoperable data format. <br><br>
 
                                 For user interactions, a secure user authentication and authorization system was
                                 established, safeguarding access to the stored credentials. This included robust
                                 mechanisms to verify the identity of users and control their access privileges.
-
+                                <br><br>
                                 The mobile application seamlessly interacted with the REST API, utilizing it as
                                 a
-                                backend service to retrieve and display user information. This approach ensured
+                                backend service to retrieve and display user information. <br><br>This approach ensured
                                 a
                                 smooth and secure user experience, allowing individuals to manage and share
                                 their
@@ -161,12 +161,13 @@
                                 resources. Amazon API Gateway orchestrates REST APIs, while AWS Lambda supports
                                 serverless
                                 computing, allowing for efficient execution of backend processes without managing
-                                servers.
+                                servers. <br><br>
                                 SES and SNS facilitate email sending, receiving, and notifications, respectively. Amazon
                                 Cognito provides secure user authentication and management. Data security and
                                 configuration
                                 management are ensured through the use of AWS Secrets Manager, safeguarding sensitive
-                                information. The development process is streamlined with CodeCommit, offering a secure
+                                information. <br><br>The development process is streamlined with CodeCommit, offering a
+                                secure
                                 Git
                                 repository for source control. Infrastructure deployment and management are efficiently
                                 handled by AWS SAM and CloudFormation, providing templates for serverless applications
@@ -181,7 +182,7 @@
                                 highly
                                 modular and scalable microservice dedicated to managing user authentication, which could
                                 be
-                                seamlessly integrated with diverse applications requiring minimal effort. This
+                                seamlessly integrated with diverse applications requiring minimal effort. <br><br>This
                                 microservice
                                 aims to abstract and centralize the authentication processes, ensuring a uniform and
                                 secure
@@ -190,7 +191,7 @@
                                 <strong>The Solution</strong><br>
                                 The solution to the identified problem involved the development of a secure REST API,
                                 leveraging the serverless architecture of AWS Lambda and API Gateway. This approach
-                                facilitated scalability and simplified maintenance. At the heart of the user
+                                facilitated scalability and simplified maintenance. <br><br>At the heart of the user
                                 authentication
                                 service was Amazon Cognito, which provided a comprehensive set of features for managing
                                 users, handling authentication, and ensuring security. The integration with the boto3
@@ -201,7 +202,7 @@
                                 the
                                 use of AWS Simple Email Service (SES) and Simple Notification Service (SNS) for email
                                 and
-                                phone verification, respectively. This strategic use of AWS services ensured the
+                                phone verification, respectively. <br><br>This strategic use of AWS services ensured the
                                 creation of
                                 a secure, scalable, and efficient authentication microservice that could be readily
                                 integrated into various applications with minimal effort required. <br>
@@ -277,7 +278,7 @@
                             email event tracking system. This system needed to
                             accurately capture, monitor, and log various email-related events, including, but not
                             limited
-                            to, emails being sent, opened, and bounced. Furthermore, it required the extraction,
+                            to, emails being sent, opened, and bounced. <br><br>Furthermore, it required the extraction,
                             processing,
                             and loading (ETL) of this data into a format that is conducive to analysis and could
                             subsequently
@@ -318,13 +319,13 @@
                             server-side logic and web development, while PostgreSQL is employed as the relational
                             database
                             for efficient data storage. AWS Cloud9 serves as the integrated development environment,
-                            providing a collaborative and cloud-based platform for coding and testing. GitHub is
+                            providing a collaborative and cloud-based platform for coding and testing. <br><br>GitHub is
                             utilized
                             for version control, offering a centralized repository for source code management and
                             collaboration. Celery is integrated for distributed task processing, enhancing the
                             scalability
                             and responsiveness of the application. Third-party libraries are selectively incorporated to
-                            leverage additional functionalities and streamline development processes. This stack
+                            leverage additional functionalities and streamline development processes. <br><br>This stack
                             provides a
                             robust foundation for building scalable, secure, and feature-rich web applications. <br>
                             <br>
