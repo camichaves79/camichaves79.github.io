@@ -64,6 +64,8 @@ canvas {
 
 .glass-padding {
     padding: 1.5rem;
+    width: 85%;
+
 }
 
 .blurred-bg {
@@ -141,10 +143,24 @@ p {
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
 }
+#projects {
+    width: 80%;
+}
 
 /* ALL MEDIA QUERIES AT THE BOTTOM OF THE FILE */
 @media only screen and (max-width: 768px) {
     .main-card-wrapper h1 {
         font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .glass-padding {
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    #projects {
+        width: 100%;
     }
 }
