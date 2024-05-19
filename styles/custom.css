@@ -150,7 +150,8 @@ p {
 .profile_picture{
     position: fixed;
     z-index: 1;
-    display: none;
+    height: 1px;
+    width: 1px;
 }
 
 /* ALL MEDIA QUERIES AT THE BOTTOM OF THE FILE */
