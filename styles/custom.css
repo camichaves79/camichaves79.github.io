@@ -71,7 +71,7 @@ canvas {
 .blurred-bg {
     transition: all 5s ease-in;
     backdrop-filter: blur(1px);
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .bg-gray-900 {
