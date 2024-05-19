@@ -147,6 +147,11 @@ p {
     width: 80%;
 }
 
+.profile_picture{
+    position: relative;
+    z-index: 1;
+}
+
 /* ALL MEDIA QUERIES AT THE BOTTOM OF THE FILE */
 @media only screen and (max-width: 768px) {
     .main-card-wrapper h1 {
