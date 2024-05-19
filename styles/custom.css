@@ -148,8 +148,9 @@ p {
 }
 
 .profile_picture{
-    position: relative;
+    position: fixed;
     z-index: 1;
+    display: none;
 }
 
 /* ALL MEDIA QUERIES AT THE BOTTOM OF THE FILE */
