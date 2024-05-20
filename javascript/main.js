@@ -15,7 +15,7 @@ var draw = function () {
     var greenValue = Math.floor(200 * (1 - fraction));
     var color = `rgb(0, ${greenValue}, 0)`; // Construct the color string
 
-    q.getContext('2d').fillStyle = 'rgba(0,0,0,.05)';
+    q.getContext('2d').fillStyle = 'rgba(0,0,0,.06)';
     q.getContext('2d').fillRect(0, 0, width, height);
     q.getContext('2d').fillStyle = color; // Use the interpolated color
 
