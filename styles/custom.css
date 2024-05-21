@@ -69,10 +69,9 @@ canvas {
 }
 
 .blurred-bg {
-    transition: all 5s ease-in;
+    opacity: .3;
+    transition: opacity 5s ease-in;
     backdrop-filter: blur(1px);
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: -1;
 }
 
 .bg-gray-900 {
@@ -119,15 +118,6 @@ canvas {
     width: 100%;
     background-color: rgba(19, 39, 17, .7);
     padding: 2rem 3rem 4rem 3rem;
-}
-
-#vignette {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
 }
 
 footer {

@@ -63,7 +63,7 @@ function initScroll() {
 }
 
 function blurrBg() {
-    var el = document.getElementById('vignette');
+    var el = document.getElementById('q');
     el.classList.add("blurred-bg");
 }
 
