@@ -143,6 +143,27 @@
                                 <br>
                                 <br>
                             </p>
+                            <div>
+                                <pre><code class="language-python">
+import json
+import boto3
+
+
+class Robot(machine):
+    def __init__(name: str):                                        
+        self.name = name
+
+
+def to_list(name: str)->list:
+    return list(name)
+
+
+luis = Robot("Luis")
+luis_list = to_list(luis.name)
+
+
+                                </code></pre>
+                            </div>
                         </div>
                         <a href="#knowkee-project">
                             <button id="knowkeeId" onclick="toggleDropdown('knowkee')" class="cami-btn">
