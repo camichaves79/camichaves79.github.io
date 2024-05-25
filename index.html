@@ -8,6 +8,9 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./styles/custom.css">
+    <link rel="stylesheet" href="./highlight/styles/base16/green-screen.min.css">
+    <script src="./highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <meta property="og:url" content="https://www.camilochaves.com" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Camilo Chaves Backend Developer Portfolio" />
@@ -52,8 +55,8 @@
                         App Store
                     </p>
                     <div class="dropdown inline-block mt-4">
-                        <div id="knowkee-dropdown" class="dropdown-content hidden text-gray-300 mt-2">
-                            <p class="pb-5"><strong>My Role</strong> <br>Backend. I collaborated in the
+                        <div id="knowkee-dropdown" class="dropdown-content hidden mt-2">
+                            <p class="pb-5 text-gray-300"><strong>My Role</strong> <br>Backend. I collaborated in the
                                 creation, from scratch, of this
                                 application available on the Play Store and App Store. <br>Throughout the entire
                                 development
@@ -140,6 +143,27 @@
                                 <br>
                                 <br>
                             </p>
+                            <div>
+                                <pre><code class="language-python">
+import json
+import boto3
+
+
+class Robot(machine):
+    def __init__(name: str):                                        
+        self.name = name
+
+
+def to_list(name: str)->list:
+    return list(name)
+
+
+luis = Robot("Luis")
+luis_list = to_list(luis.name)
+
+
+                                </code></pre>
+                            </div>
                         </div>
                         <a href="#knowkee-project">
                             <button id="knowkeeId" onclick="toggleDropdown('knowkee')" class="cami-btn">
@@ -154,9 +178,10 @@
                         A user authentication API now being offered commercially as SaaS
                     </p>
                     <div class="dropdown inline-block mt-4">
-                        <div id="smartpass-dropdown" class="dropdown-content hidden text-gray-300 mt-2">
+                        <div id="smartpass-dropdown" class="dropdown-content hidden mt-2">
                             <!-- Add detailed project information here -->
-                            <p><strong>My Role</strong><br> Backend. I tackled (under the supervision of the lead
+                            <p class="pb-5 text-gray-300"><strong>My Role</strong><br> Backend. I tackled (under the
+                                supervision of the lead
                                 developer and CTO) the creation of this user authentication microservice from scratch.
                                 Throughout the entire development lifecycle of the service, I participated as a backend
                                 developer.<br>
@@ -229,76 +254,89 @@
                         campaigns
                     </p>
                     <div class="dropdown inline-block mt-4">
-                        <div id="email-dropdown" class="dropdown-content hidden text-gray-300 mt-2">
+                        <div id="email-dropdown" class="dropdown-content hidden mt-2">
                             <!-- Add detailed project information here -->
-                            <strong>My Role</strong> <br>Backend. I handled (under the supervision of the lead
-                            developer and CTO) the implementation of this email event data streaming ETL pipeline.
-                            Throughout the coding, testing, deployment and maintenance of the system, I participated as
-                            a
-                            backend
-                            developer.<br>
-                            <br>
-                            <strong>The Tech Stack</strong> <br>This tech stack is centered around Node.js for
-                            server-side
-                            logic, emphasizing asynchronous operations and scalability for web applications. AWS Lambda
-                            is
-                            specifically used for processing data received through SES (Simple Email Service), handling
-                            email data and storing it in Amazon S3, serving as the foundation for data storage and
-                            management within this architecture. <br>
-                            <br>
-                            Amazon Kinesis Firehose takes on the role of managing real-time data streaming, capable of
-                            capturing, transforming, and loading streaming data into Amazon S3. This facilitates further
-                            analytics and data processing tasks, leveraging the seamless integration within the AWS
-                            ecosystem. <br>
-                            <br>
-                            AWS Glue plays a key part in preparing and transforming the SES data stored in S3 for
-                            analysis,
-                            automating the ETL (extract, transform, load) processes, which is essential for organizing
-                            data
-                            into a query-able format. This structured data is then made available for interactive
-                            querying
-                            with Amazon Athena, which uses standard SQL to query data directly within Amazon S3,
-                            offering
-                            powerful data analysis capabilities without the need for a traditional database. <br>
-                            <br>
-                            The analysis results can be visualized and explored through Amazon QuickSight, which
-                            provides
-                            interactive dashboards and visualizations. QuickSight's integration with Athena and direct
-                            access to S3 data enables comprehensive insights and analytics derived from the processed
-                            SES
-                            data. <br>
-                            <br>
-                            In summary, this tech stack uses Node.js for its application logic, with AWS Lambda
-                            processing
-                            SES data for storage in S3. Amazon Kinesis Firehose, AWS Glue, Amazon Athena, and Amazon
-                            QuickSight form a pipeline that captures, processes, analyzes, and visualizes data,
-                            demonstrating a cohesive flow of data processing and analysis within the AWS cloud
-                            environment.<br>
-                            <br>
-                            <strong>The team</strong> <br>For this project the team was conformed by 1 backend
-                            developer,
-                            a lead developer, and a product owner (the CTO). <br>
-                            <br>
-                            <strong>The Problem</strong><br> The challenge involved designing and implementing a
-                            comprehensive
-                            email event tracking system. This system needed to
-                            accurately capture, monitor, and log various email-related events, including, but not
-                            limited
-                            to, emails being sent, opened, and bounced. <br><br>Furthermore, it required the extraction,
-                            processing,
-                            and loading (ETL) of this data into a format that is conducive to analysis and could
-                            subsequently
-                            be leveraged to derive actionable insights for the marketing department, thereby
-                            facilitating
-                            data-driven decision-making and enhancing marketing strategies.<br>
-                            <br>
-                            <strong>The Solution</strong><br>
-                            The solution was to develop a streamlined pipeline that captures Simple Email Service (SES)
-                            events in real-time, extracts this data on the fly, and transforms and loads it as needed.
-                            This
-                            approach keeps the marketing team's BI insights fresh, empowering them with up-to-the-minute
-                            data to inform their strategies.<br>
-                            <br>
+                            <p class="pb-5 text-gray-300"><strong>My Role</strong> <br>Backend. I handled (under the
+                                supervision of the lead
+                                developer and CTO) the implementation of this email event data streaming ETL pipeline.
+                                Throughout the coding, testing, deployment and maintenance of the system, I participated
+                                as
+                                a
+                                backend
+                                developer.<br>
+                                <br>
+                                <strong>The Tech Stack</strong> <br>This tech stack is centered around Node.js for
+                                server-side
+                                logic, emphasizing asynchronous operations and scalability for web applications. AWS
+                                Lambda
+                                is
+                                specifically used for processing data received through SES (Simple Email Service),
+                                handling
+                                email data and storing it in Amazon S3, serving as the foundation for data storage and
+                                management within this architecture. <br>
+                                <br>
+                                Amazon Kinesis Firehose takes on the role of managing real-time data streaming, capable
+                                of
+                                capturing, transforming, and loading streaming data into Amazon S3. This facilitates
+                                further
+                                analytics and data processing tasks, leveraging the seamless integration within the AWS
+                                ecosystem. <br>
+                                <br>
+                                AWS Glue plays a key part in preparing and transforming the SES data stored in S3 for
+                                analysis,
+                                automating the ETL (extract, transform, load) processes, which is essential for
+                                organizing
+                                data
+                                into a query-able format. This structured data is then made available for interactive
+                                querying
+                                with Amazon Athena, which uses standard SQL to query data directly within Amazon S3,
+                                offering
+                                powerful data analysis capabilities without the need for a traditional database. <br>
+                                <br>
+                                The analysis results can be visualized and explored through Amazon QuickSight, which
+                                provides
+                                interactive dashboards and visualizations. QuickSight's integration with Athena and
+                                direct
+                                access to S3 data enables comprehensive insights and analytics derived from the
+                                processed
+                                SES
+                                data. <br>
+                                <br>
+                                In summary, this tech stack uses Node.js for its application logic, with AWS Lambda
+                                processing
+                                SES data for storage in S3. Amazon Kinesis Firehose, AWS Glue, Amazon Athena, and Amazon
+                                QuickSight form a pipeline that captures, processes, analyzes, and visualizes data,
+                                demonstrating a cohesive flow of data processing and analysis within the AWS cloud
+                                environment.<br>
+                                <br>
+                                <strong>The team</strong> <br>For this project the team was conformed by 1 backend
+                                developer,
+                                a lead developer, and a product owner (the CTO). <br>
+                                <br>
+                                <strong>The Problem</strong><br> The challenge involved designing and implementing a
+                                comprehensive
+                                email event tracking system. This system needed to
+                                accurately capture, monitor, and log various email-related events, including, but not
+                                limited
+                                to, emails being sent, opened, and bounced. <br><br>Furthermore, it required the
+                                extraction,
+                                processing,
+                                and loading (ETL) of this data into a format that is conducive to analysis and could
+                                subsequently
+                                be leveraged to derive actionable insights for the marketing department, thereby
+                                facilitating
+                                data-driven decision-making and enhancing marketing strategies.<br>
+                                <br>
+                                <strong>The Solution</strong><br>
+                                The solution was to develop a streamlined pipeline that captures Simple Email Service
+                                (SES)
+                                events in real-time, extracts this data on the fly, and transforms and loads it as
+                                needed.
+                                This
+                                approach keeps the marketing team's BI insights fresh, empowering them with
+                                up-to-the-minute
+                                data to inform their strategies.<br>
+                                <br>
                             </p>
                         </div>
                         <a href="#email-etl-project">
@@ -314,43 +352,49 @@
                         A Learning Management Experience Saas Web App commercially used by big companies
                     </p>
                     <div class="dropdown inline-block mt-4">
-                        <div id="kme-dropdown" class="dropdown-content hidden text-gray-300 mt-2">
+                        <div id="kme-dropdown" class="dropdown-content hidden mt-2">
                             <!-- Add detailed project information here -->
-                            <strong>My Role</strong> <br>Backend. I resolved support tickets and created new features
-                            for a
-                            Sass LMS monolithic architected web application.<br>
-                            <br>
-                            <strong>The Tech Stack</strong> <br>In this tech stack, Python and Django form the backbone
-                            for
-                            server-side logic and web development, while PostgreSQL is employed as the relational
-                            database
-                            for efficient data storage. AWS Cloud9 serves as the integrated development environment,
-                            providing a collaborative and cloud-based platform for coding and testing. <br><br>GitHub is
-                            utilized
-                            for version control, offering a centralized repository for source code management and
-                            collaboration. Celery is integrated for distributed task processing, enhancing the
-                            scalability
-                            and responsiveness of the application. Third-party libraries are selectively incorporated to
-                            leverage additional functionalities and streamline development processes. <br><br>This stack
-                            provides a
-                            robust foundation for building scalable, secure, and feature-rich web applications. <br>
-                            <br>
-                            <strong>The team</strong><br> For this project the team was conformed by 3 backend
-                            developers, 3 frontend developers,
-                            and a lead developer. <br>
-                            <br>
-                            <strong>The Problem</strong><br> Providing assistance and implementing additional
-                            functionalities
-                            during the maintenance phase of this robust Learning Management Experience Software as a
-                            Service
-                            (SaaS) application posed a challenge.<br>
-                            <br>
-                            <strong>The Solution</strong><br>
-                            The solution involved addressing each challenge through a systematic approach: comprehending
-                            the problem, collecting requirements, designing a solution, coding, testing, and
-                            deploying—all
-                            executed in an agile methodology.<br>
-                            <br>
+                            <p class="pb-5 text-gray-300"><strong>My Role</strong> <br>Backend. I resolved support
+                                tickets and created new features
+                                for a
+                                Sass LMS monolithic architected web application.<br>
+                                <br>
+                                <strong>The Tech Stack</strong> <br>In this tech stack, Python and Django form the
+                                backbone
+                                for
+                                server-side logic and web development, while PostgreSQL is employed as the relational
+                                database
+                                for efficient data storage. AWS Cloud9 serves as the integrated development environment,
+                                providing a collaborative and cloud-based platform for coding and testing.
+                                <br><br>GitHub is
+                                utilized
+                                for version control, offering a centralized repository for source code management and
+                                collaboration. Celery is integrated for distributed task processing, enhancing the
+                                scalability
+                                and responsiveness of the application. Third-party libraries are selectively
+                                incorporated to
+                                leverage additional functionalities and streamline development processes. <br><br>This
+                                stack
+                                provides a
+                                robust foundation for building scalable, secure, and feature-rich web applications. <br>
+                                <br>
+                                <strong>The team</strong><br> For this project the team was conformed by 3 backend
+                                developers, 3 frontend developers,
+                                and a lead developer. <br>
+                                <br>
+                                <strong>The Problem</strong><br> Providing assistance and implementing additional
+                                functionalities
+                                during the maintenance phase of this robust Learning Management Experience Software as a
+                                Service
+                                (SaaS) application posed a challenge.<br>
+                                <br>
+                                <strong>The Solution</strong><br>
+                                The solution involved addressing each challenge through a systematic approach:
+                                comprehending
+                                the problem, collecting requirements, designing a solution, coding, testing, and
+                                deploying—all
+                                executed in an agile methodology.<br>
+                                <br>
                             </p>
                         </div>
                         <a href="#kme360-project">
