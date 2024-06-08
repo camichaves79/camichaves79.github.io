@@ -46,6 +46,7 @@ canvas {
     position: relative;
     z-index: 1;
     margin: 0;
+    width: 100vw;
     /* Ensure content starts below the canvas */
     /* Add some padding for better visibility */
 }
@@ -127,12 +128,17 @@ footer {
 p {
     line-height: 2.0; /* 1.5 times the font size */
     letter-spacing: 1px;
+    word-break: normal;
+    white-space: normal;
+    width: auto;
 }
 
 .dropdown-content {
 
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
+    overflow:hidden;
+    word-wrap: break-word;
 }
 #projects {
     width: 80%;
@@ -143,6 +149,13 @@ p {
     z-index: 1;
     height: 0px;
     width: 0px;
+}
+
+.code-block{
+    width: auto;
+    border-width: 3px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 /* ALL MEDIA QUERIES AT THE BOTTOM OF THE FILE */
@@ -162,3 +175,9 @@ p {
         width: 100%;
     }
 }
+@media only screen and (max-width: 768px) {
+    .code-block {
+        font-size: 2.4vw;
+    }
+}
+

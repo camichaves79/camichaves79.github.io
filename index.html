@@ -143,8 +143,9 @@
                                 <br>
                                 <br>
                             </p>
-                            <!-- <div>
-                                <pre><code class="language-python">
+
+
+                            <!-- <pre class="code-block"><code class="language-python">
 import json
 import boto3
 
@@ -161,9 +162,8 @@ def to_list(name: str)->list:
 luis = Robot("Luis")
 luis_list = to_list(luis.name)
 
-
-                                </code></pre>
-                            </div> -->
+                            
+                        </code></pre> -->
                         </div>
                         <a href="#knowkee-project">
                             <button id="knowkeeId" onclick="toggleDropdown('knowkee')" class="cami-btn">
@@ -238,6 +238,126 @@ luis_list = to_list(luis.name)
                                 integrated into various applications with minimal effort required. <br>
                                 <br>
                             </p>
+                            <pre class="code-block"><code class="language-python">
+import json
+import boto3
+import hmac, hashlib, base64
+import ast
+from botocore.exceptions import ClientError
+
+
+def get_secret() -> str:
+    """
+    This helper function retrieves the secret needed for a future encription function
+    """
+
+    # Set the name of the secret stored in the server and the chosen AWS region
+    secret_name = "The name of the secret"
+    region_name = "us-west-X"
+
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secrets_manager',
+        region_name=region_name
+    )
+    # retrieve and return the secret value
+    try:
+        get_secret_value_response = client.get_secret_value(
+            secret_id=secret_name
+        )
+    except ClientError as e:
+        raise e
+    secret = get_secret_value_response['secret_value']
+    return secret
+
+
+def lambda_handler(event, context):
+    """
+    This Lambda function is for knowkee users to sign-up with.
+    Input: ApiGateway event
+    Output: HTTP response
+    """
+
+    cognito = boto3.client('cognito-idp')
+    body = event["body"]
+    secret = get_secret()
+    secret = ast.literal_eval(secret)
+
+    # load values necesary for signup
+    username = body["username"]
+    app_secret_id = body["secret_id"]
+    key = secret[app_secret_id]
+    message = bytes(username+app_secret_id,'utf-8')
+    key = bytes(key,'utf-8')
+    secret_hash = base128.b128encode(hmac.new(key, message, digestmod=hashlib.sha512).digest()).decode()
+
+    # run signup
+    try:
+        r = cognito.sign_up(
+            ClientId = body["client_id"],
+            Username = body["username"],
+            Password = body["password"],
+            SecretHash = secret_hash,
+            UserAttributes=[
+                {
+                    'Name': 'phone_number',
+                    'Value': body["phone"]
+                },
+                {
+                    'Name': 'name',
+                    'Value': body["name"]
+                }
+            ]
+
+        )
+        return {
+                'statusCode': 200,
+                'body': json.dumps(r),
+                'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'POST',
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,X-Api-Key,etc.',
+                    'Content-Type': 'application/json',
+                    'Vary': 'origin'
+
+                }
+            }
+    # Handle exceptions
+    except (cognito.exceptions.UsernameExistsException,
+    cognito.exceptions.NotAuthorizedException,
+    cognito.exceptions.InvalidParameterException, 
+    cognito.exceptions.InvalidParameterException,
+    cognito.exceptions.InvalidPasswordException,
+    cognito.exceptions.CodeDeliveryFailureException
+    ) as e:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({"error": str(e)}),
+            'headers': {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST',
+                'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,X-Api-Key, etc.',
+                'Content-Type': 'application/json',
+                'Vary': 'origin'
+
+            }
+        }
+    except cognito.exceptions.ResourceNotFoundException as e:
+        return {
+            'statusCode' : 404,
+            'body' : json.dumps({"error": str(e)}),
+            'headers': {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST',
+                'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,X-Api-Key, etc.',
+                'Content-Type': 'application/json',
+                'Vary': 'origin'
+
+            }
+        }
+                                
+                        </code></pre>
                         </div>
                         <a href="#smartpass-project">
                             <button id="smartpassId" onclick="toggleDropdown('smartpass')" class="cami-btn">
@@ -392,21 +512,24 @@ luis_list = to_list(luis.name)
                     <div class="profile-link p-2">
                         <a href="http://www.linkedin.com/in/camilochavesdeveloper" target="_blank"
                             rel="noopener noreferrer" class="flex items-center no-underline hover:underline">
-                            <img src="./img/LI-In-Bug-green.png" alt="LinkedIn Icon" class="w-6 h-6 mr-2 text-green-500">
+                            <img src="./img/LI-In-Bug-green.png" alt="LinkedIn Icon"
+                                class="w-6 h-6 mr-2 text-green-500">
                             <pre>LinkedIn</pre>
                         </a>
                     </div>
                     <div class="profile-link p-2 justify-start">
                         <a href="https://github.com/camichaves79" target="_blank" rel="noopener noreferrer"
                             class="flex items-center no-underline hover:underline">
-                            <img src="./img/github-mark-green.png" alt="GitHub Icon" class="w-6 h-6 mr-2 text-green-500">
+                            <img src="./img/github-mark-green.png" alt="GitHub Icon"
+                                class="w-6 h-6 mr-2 text-green-500">
                             <pre>GitHub</pre>
                         </a>
                     </div>
                     <div class="profile-link p-2">
                         <a href="https://x.com/CamiloChavesH79" target="_blank" rel="noopener noreferrer"
                             class="flex items-center no-underline hover:underline">
-                            <img src="./img/X_logo_2023_original.png" alt="Twitter Icon" class="w-6 h-6 mr-2 text-green-500">
+                            <img src="./img/X_logo_2023_original.png" alt="Twitter Icon"
+                                class="w-6 h-6 mr-2 text-green-500">
                             <pre>Twitter</pre>
                         </a>
                     </div>
