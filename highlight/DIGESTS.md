@@ -19,11 +19,15 @@ The full list of digests for every file can be found below.
 ### Digests
 
 ```
+sha384-Cmf5dWet5uM0hHIQztQ4xuR98BdUDJRtz2Fh7yUY7gYckg6LgLPk3wSNlp+U8DHN /es/languages/node-repl.js
+sha384-16Wkm0YivnMLEbWFVCc7XZ5oI2EKz/82+cGW0lnb4GHN8YD7XBaVcvSGLOeh47lo /es/languages/node-repl.min.js
 sha384-+5oyk7Ed3OlvEWGj8xracq/6e52BScKUN4kxcreNwB7kfRTVsAMs/aAJM58dzIFN /es/languages/python.js
 sha384-ND/UH2UkaeWiej5v/oJspfKDz9BGUaVpoDcz4cof0jaiv/mCigjvy7RQ7e+3S6bg /es/languages/python.min.js
+sha384-QA4s4jhVZvg55kXTakXI7uiAU+vc76cSDZyQUr+L5n264S/PccW4tzJSO4ZW5YV8 /languages/node-repl.js
+sha384-xPT/DjMX+BQlJVnPobXtRQHno6nxWndjO33v2Xo4s1QO3BFFKTZHPvoZEfMzFzAD /languages/node-repl.min.js
 sha384-zdZio5RcGiKQJCpe/1IXujPle3bIY8sbmvCabSU5G5GzWAzZtoRZfg9QAQXCL08q /languages/python.js
 sha384-IP4vv4Aoh9Lyg8QyzVkAmn2JGoDCpgVHzVSrD3Z+rVyn7+s4wx4pRjv+go3TEwfj /languages/python.min.js
-sha384-/TsurRu7Dnr0lDYlqOE86UvmyyNE/qJ0dn6zfL+/w83nJuhm2eGfByLQotgA0QuP /highlight.js
-sha384-V7uUQDsMhK6quSoMnoqvCSrVXocZw/b44rNsc1U4rXxFeecF3gJVwGb4FR3L7E4y /highlight.min.js
+sha384-x4oYVrqXIwFZPb7nsavslKWI+L0cXIleSvJiCd+wj/fgeZJdtEhWJInEYEXpU2CJ /highlight.js
+sha384-RoV4rgMJPbAAaCDNnSSPvgNorc03HwhTzWLtjglEPGT11NSfqZSiXICJNbCMRHL7 /highlight.min.js
 ```
 
