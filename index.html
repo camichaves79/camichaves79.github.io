@@ -50,13 +50,14 @@
                 <div id="knowkee-project" class="glass glass-padding">
                     <h3 class="text-xl font-bold mb-2">Knowkee (mobile app)</h3>
                     <p class="text-gray-300">
-                        A digital wallet for you to store and share your life achievements, available on the <a href="https://play.google.com/store/apps/details?id=com.knowkeewallet&pli=1" target="_blank"
-                        rel="noopener noreferrer" style="color: #d0c700;">Play Store</a>
+                        A digital wallet for you to store and share your life achievements, available on the <a
+                            href="https://play.google.com/store/apps/details?id=com.knowkeewallet&pli=1" target="_blank"
+                            rel="noopener noreferrer" style="color: #d0c700;">Play Store</a>
                         and
                         <a href="https://apps.apple.com/us/app/knowkee/id6448114191" target="_blank"
                             rel="noopener noreferrer" style="color: #d0c700;">App Store</a>
                     </p>
-                    <div class="dropdown inline-block mt-4">
+                    <div class="inline-block mt-4">
                         <div id="knowkee-dropdown" class="dropdown-content hidden text-gray-300 mt-2">
                             <p class="pb-5"><strong>My Role</strong> <br>Backend. I collaborated in the
                                 creation, from scratch, of this
@@ -147,25 +148,190 @@
                             </p>
 
 
-                            <!-- <pre class="code-block"><code class="language-python">
+                            <pre class="code-block"><code class="language-python">
 import json
 import boto3
+import pymongo
 
 
-class Robot(machine):
-    def __init__(name: str):                                        
-        self.name = name
+def handle_delete(event):
+    """
+    Delete an object from the email taken collection
+    Arguments:
+    event (dict) -- HTTP request data 
+    (a JSON-formatted document that contains data for a Lambda function to process).
+    Output:
+    Deletion prompt (str) -- Indicates if something was deleted or not
+    """
 
-        
-def to_list(name: str)->list:
-    return list(name)
+    collection = event["operation_context"]["database"]
+    body = json.loads(event["body"])
+    query_filter = None
+
+    if "filter" in body.keys():
+        query_filter = {"email": body["filter"]["email"]}
+    response = collection.delete_one(query_filter)
+
+    if response.deleted_count():
+        return "Successfully deleted"
+    return "Nothing was deleted"
 
 
-luis = Robot("Luis")
-luis_list = to_list(luis.name)
+def handle_patch(event):
+    """
+    Edit the taken status of an email already in the DB
+    Arguments:
+    event (dict) -- HTTP request data 
+    (a JSON-formatted document that contains data for a Lambda function to process).
+    Output:
+    Updated prompt (str) -- Indicates if something was updated or not
+    """
+    collection = event["operation_context"]["users"]
+    query_filter = None
+    update = None
+    body = json.loads(event["body"])
 
-                            
-                        </code></pre> -->
+    if "filter" in body.keys():
+        query_filter = {"email": body["filter"]["email"]}
+    if "update" in body.keys():
+        update = body["update"]
+
+    try:
+        collection.update_one(query_filter, update)
+        print("Actually updated")
+        return 200
+    except Exception as e:
+        print("error : ", e)
+    return 304
+
+
+def handle_post(event):
+    """
+    Mark the taken status of an email by creting an object in the DB
+    Arguments:
+    event (dict) -- HTTP request data (a JSON-formatted document that contains 
+    data for a Lambda function to process).
+    
+    """
+    collection = event["operation_context"]["database"]
+    body = json.loads(event["body"])
+    response = collection.insert_one(body)
+    if response.inserted_count():
+        return body
+    return None
+
+
+def handle_get(event):
+    """
+    Check if an email is taken or not
+    Arguments:
+    event (dict) -- HTTP request data (a JSON-formatted document that contains data for a Lambda function to process).
+    Output:
+    Database object (dict) 
+    """
+    collection = event["operation_context"]["database"]
+    input_qs = event["queryStringParameters"]
+    email = input_qs["email"]    
+    res = list(collection.find({"email": email}, {"email":1, "taken":1, "_id":0}))
+    return res
+
+
+def lambda_handler(event, context):
+    """
+    Point of entry to the AWS Lambda compute service.
+    This function is to be used to determine whether an email is in use or not by another user in the app
+    Arguments:
+    event (dict) -- HTTP request data (a JSON-formatted document that contains data for a Lambda function to process). 
+    context (dict) -- methods and properties that provide information about the invocation, function, and execution environment
+    
+    Output:
+    JSON-formated HTTP response
+    """
+
+    http_method = event["http_method"]
+    operation_context_data = event["operation_context_data"]
+    event["operation_context"] = operation_context_data
+    retval = "Done"
+
+    if "GET" == http_method:
+        retval = handle_get(event)
+        print(retval)
+        if retval:
+            return {
+                'statusCode': 200,
+                'body': json.dumps(retval),
+                'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                    'Vary': 'origin',
+                    'Content-Type': 'application/json'
+                }
+            }
+        return {
+                'statusCode': 404,
+                'body': json.dumps("Not Found"),
+                'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                    'Vary': 'origin',
+                    'Content-Type': 'application/json'
+                }
+            }
+    if "POST" == http_method:A
+        retval = handle_post(event)
+        if retval:
+            return {
+                'statusCode': 200,
+                'body': json.dumps("OK"),
+                'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                    'Vary': 'origin',
+                    'Content-Type': 'application/json'
+                }        
+            }
+        return {
+            'statusCode': 400,
+            'body': json.dumps("Bad Request"),
+            'headers': {
+                'Access-Control-Allow-Origin': '*',
+                'Vary': 'origin',
+                'Content-Type': 'application/json'
+            }        
+        }
+    if "PATCH" == http_method:
+        retval = handle_patch(event)
+        if retval == 200:
+            return {
+                'statusCode': 200,
+                'body': json.dumps("OK"),
+                'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                    'Vary': 'origin',
+                    'Content-Type': 'application/json'
+                }        
+            }
+        return {
+                'statusCode': 304,
+                'body': json.dumps("Not Modified"),
+                'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                    'Vary': 'origin',
+                    'Content-Type': 'application/json'
+                }        
+            }
+    if "DELETE" == http_method:
+        retval = handle_delete(event)
+
+    print(retval)
+    return {
+        'statusCode': 200,
+        'body': json.dumps(retval),
+        'headers': {
+            'Access-Control-Allow-Origin': '*',
+            'Vary': 'origin',
+            'Content-Type': 'application/json'
+        }        
+    }
+                  
+                        </code></pre>
                         </div>
                         <a href="#knowkee-project">
                             <button id="knowkeeId" onclick="toggleDropdown('knowkee')" class="cami-btn">
@@ -179,9 +345,8 @@ luis_list = to_list(luis.name)
                     <p class="text-gray-300">
                         A user authentication API now being offered commercially as SaaS
                     </p>
-                    <div class="dropdown inline-block mt-4">
+                    <div class="inline-block mt-4">
                         <div id="smartpass-dropdown" class="dropdown-content hidden text-gray-300 mt-2">
-                            <!-- Add detailed project information here -->
                             <p><strong>My Role</strong><br> Backend. I tackled (under the supervision of the lead
                                 developer and CTO) the creation of this user authentication microservice from scratch.
                                 Throughout the entire development lifecycle of the service, I participated as a backend
@@ -375,78 +540,446 @@ def lambda_handler(event, context):
                         An email event data streaming ETL pipeline providing business insights for marketing email
                         campaigns
                     </p>
-                    <div class="dropdown inline-block mt-4">
+                    <div class="mt-4">
                         <div id="email-dropdown" class="dropdown-content hidden text-gray-300 mt-2">
-                            <!-- Add detailed project information here -->
-                            <strong>My Role</strong> <br>Backend. I handled (under the supervision of the lead
-                            developer and CTO) the implementation of this email event data streaming ETL pipeline.
-                            Throughout the coding, testing, deployment and maintenance of the system, I participated as
-                            a
-                            backend
-                            developer.<br>
-                            <br>
-                            <strong>The Tech Stack</strong> <br>This tech stack is centered around Node.js for
-                            server-side
-                            logic, emphasizing asynchronous operations and scalability for web applications. AWS Lambda
-                            is
-                            specifically used for processing data received through SES (Simple Email Service), handling
-                            email data and storing it in Amazon S3, serving as the foundation for data storage and
-                            management within this architecture. <br>
-                            <br>
-                            Amazon Kinesis Firehose takes on the role of managing real-time data streaming, capable of
-                            capturing, transforming, and loading streaming data into Amazon S3. This facilitates further
-                            analytics and data processing tasks, leveraging the seamless integration within the AWS
-                            ecosystem. <br>
-                            <br>
-                            AWS Glue plays a key part in preparing and transforming the SES data stored in S3 for
-                            analysis,
-                            automating the ETL (extract, transform, load) processes, which is essential for organizing
-                            data
-                            into a query-able format. This structured data is then made available for interactive
-                            querying
-                            with Amazon Athena, which uses standard SQL to query data directly within Amazon S3,
-                            offering
-                            powerful data analysis capabilities without the need for a traditional database. <br>
-                            <br>
-                            The analysis results can be visualized and explored through Amazon QuickSight, which
-                            provides
-                            interactive dashboards and visualizations. QuickSight's integration with Athena and direct
-                            access to S3 data enables comprehensive insights and analytics derived from the processed
-                            SES
-                            data. <br>
-                            <br>
-                            In summary, this tech stack uses Node.js for its application logic, with AWS Lambda
-                            processing
-                            SES data for storage in S3. Amazon Kinesis Firehose, AWS Glue, Amazon Athena, and Amazon
-                            QuickSight form a pipeline that captures, processes, analyzes, and visualizes data,
-                            demonstrating a cohesive flow of data processing and analysis within the AWS cloud
-                            environment.<br>
-                            <br>
-                            <strong>The team</strong> <br>For this project the team was conformed by 1 backend
-                            developer,
-                            a lead developer, and a product owner (the CTO). <br>
-                            <br>
-                            <strong>The Problem</strong><br> The challenge involved designing and implementing a
-                            comprehensive
-                            email event tracking system. This system needed to
-                            accurately capture, monitor, and log various email-related events, including, but not
-                            limited
-                            to, emails being sent, opened, and bounced. <br><br>Furthermore, it required the extraction,
-                            processing,
-                            and loading (ETL) of this data into a format that is conducive to analysis and could
-                            subsequently
-                            be leveraged to derive actionable insights for the marketing department, thereby
-                            facilitating
-                            data-driven decision-making and enhancing marketing strategies.<br>
-                            <br>
-                            <strong>The Solution</strong><br>
-                            The solution was to develop a streamlined pipeline that captures Simple Email Service (SES)
-                            events in real-time, extracts this data on the fly, and transforms and loads it as needed.
-                            This
-                            approach keeps the marketing team's BI insights fresh, empowering them with up-to-the-minute
-                            data to inform their strategies.<br>
-                            <br>
+                            <p><strong>My Role</strong> <br>Backend. I handled (under the supervision of the lead
+                                developer and CTO) the implementation of this email event data streaming ETL pipeline.
+                                Throughout the coding, testing, deployment and maintenance of the system, I participated
+                                as
+                                a
+                                backend
+                                developer.<br>
+                                <br>
+                                <strong>The Tech Stack</strong> <br>This tech stack is centered around Node.js for
+                                server-side
+                                logic, emphasizing asynchronous operations and scalability for web applications. AWS
+                                Lambda
+                                is
+                                specifically used for processing data received through SES (Simple Email Service),
+                                handling
+                                email data and storing it in Amazon S3, serving as the foundation for data storage and
+                                management within this architecture. <br>
+                                <br>
+                                Amazon Kinesis Firehose takes on the role of managing real-time data streaming, capable
+                                of
+                                capturing, transforming, and loading streaming data into Amazon S3. This facilitates
+                                further
+                                analytics and data processing tasks, leveraging the seamless integration within the AWS
+                                ecosystem. <br>
+                                <br>
+                                AWS Glue plays a key part in preparing and transforming the SES data stored in S3 for
+                                analysis,
+                                automating the ETL (extract, transform, load) processes, which is essential for
+                                organizing
+                                data
+                                into a query-able format. This structured data is then made available for interactive
+                                querying
+                                with Amazon Athena, which uses standard SQL to query data directly within Amazon S3,
+                                offering
+                                powerful data analysis capabilities without the need for a traditional database. <br>
+                                <br>
+                                The analysis results can be visualized and explored through Amazon QuickSight, which
+                                provides
+                                interactive dashboards and visualizations. QuickSight's integration with Athena and
+                                direct
+                                access to S3 data enables comprehensive insights and analytics derived from the
+                                processed
+                                SES
+                                data. <br>
+                                <br>
+                                In summary, this tech stack uses Node.js for its application logic, with AWS Lambda
+                                processing
+                                SES data for storage in S3. Amazon Kinesis Firehose, AWS Glue, Amazon Athena, and Amazon
+                                QuickSight form a pipeline that captures, processes, analyzes, and visualizes data,
+                                demonstrating a cohesive flow of data processing and analysis within the AWS cloud
+                                environment.<br>
+                                <br>
+                                <strong>The team</strong> <br>For this project the team was conformed by 1 backend
+                                developer,
+                                a lead developer, and a product owner (the CTO). <br>
+                                <br>
+                                <strong>The Problem</strong><br> The challenge involved designing and implementing a
+                                comprehensive
+                                email event tracking system. This system needed to
+                                accurately capture, monitor, and log various email-related events, including, but not
+                                limited
+                                to, emails being sent, opened, and bounced. <br><br>Furthermore, it required the
+                                extraction,
+                                processing,
+                                and loading (ETL) of this data into a format that is conducive to analysis and could
+                                subsequently
+                                be leveraged to derive actionable insights for the marketing department, thereby
+                                facilitating
+                                data-driven decision-making and enhancing marketing strategies.<br>
+                                <br>
+                                <strong>The Solution</strong><br>
+                                The solution was to develop a streamlined pipeline that captures Simple Email Service
+                                (SES)
+                                events in real-time, extracts this data on the fly, and transforms and loads it as
+                                needed.
+                                This
+                                approach keeps the marketing team's BI insights fresh, empowering them with
+                                up-to-the-minute
+                                data to inform their strategies.<br>
+                                <br>
                             </p>
+                            <h2>Code sample:</h2>
+                            <pre class="code-block"><code class="language-node-repl" style="font-family: monospace !important;">
+'use strict';
+console.log('Loading function');
+exports.handler = (event, context, callback) => {
+    /* Process the list of records and transform them */
+    const output = event.records.map((record) => {
+        console.log(record.recordId);
+        const payload =JSON.parse((Buffer.from(record.data, 'base64').toString()));
+        console.log("payload : %j", payload);
+        
+        if (payload.eventType == "Click") {
+        const resultPayLoadClick = {
+                eventType : payload.eventType,
+                clickIpAddress : payload.click.ipAddress,
+                clickLink : payload.click.link,
+                clickTimestamp : payload.click.timestamp,
+                clickUserAgent : payload.click["userAgent"],
+                
+                mailTimestamp : payload.mail.timestamp,
+                mailSource : payload.mail["source"],
+                mailSourceArn : payload.mail.sourceArn,
+                mailSendingAccountId : payload.mail.sendingAccountId,
+                mailMessageId : payload.mail.messageId,
+                mailDestination : payload.mail.destination[0],
+                
+                emailFromAddress : payload.mail.commonHeaders.from[0],
+                emailToAddress : payload.mail.destination[0],
+                emailSubject : payload.mail.commonHeaders.subject,
+                emailMessageId : payload.mail.commonHeaders.messageId,
+                
+            };
+        
+                console.log("Click logic excecuted");
+        let entry = (Buffer.from(JSON.stringify(resultPayLoadClick))).toString('utf8');
+        let result = entry + "\n";
+        const payload1 = (new Buffer.from(result, 'utf8')).toString('base64');
+            
+        
+        return{
+            recordId: record.recordId,
+            result: 'Ok',
+            data: payload1,
+        };
+        }
+        else if (payload.eventType == "Open") {
+            const resultPayLoadOpen = {
+                eventType : payload.eventType,
+                openIpAddress : payload.open.ipAddress,
+                openTimestamp : payload.open.timestamp,
+                openUserAgent : payload.open["userAgent"],
+                
+                mailTimestamp : payload.mail.timestamp,
+                mailSource : payload.mail["source"],
+                mailSourceArn : payload.mail.sourceArn,
+                mailSendingAccountId : payload.mail.sendingAccountId,
+                mailMessageId : payload.mail.messageId,
+                mailDestination : payload.mail.destination[0],
+                
+                emailFromAddress : payload.mail.commonHeaders.from[0],
+                emailToAddress : payload.mail.destination[0],
+                emailSubject : payload.mail.commonHeaders.subject,
+                emailMessageId : payload.mail.commonHeaders.messageId,
+                
+            };
+                console.log("Open logic excecuted");
+
+        let entry = (Buffer.from(JSON.stringify(resultPayLoadOpen))).toString('utf8');
+        let result = entry + "\n";
+        const payload1 = (new Buffer.from(result, 'utf8')).toString('base64');
+            
+        
+        return{
+            recordId: record.recordId,
+            result: 'Ok',
+            data: payload1,
+        };
+        }
+        else if (payload.eventType == "Bounce") {
+            const resultPayLoadBounce = {
+                eventType : payload.eventType,
+                bounceType : payload.bounce.bounceType,
+                bounceSubType : payload.bounce.bounceSubType,
+                bouncedRecipients : payload.bounce.bouncedRecipients[0].emailAddress,
+                bounceTimestamp : payload.bounce.timestamp,
+                bounceFeedbackId : payload.bounce.feedbackId,
+                bounceReportingMTA : payload.bounce.reportingMTA,
+                
+                mailTimestamp : payload.mail.timestamp,
+                mailSource : payload.mail["source"],
+                mailSourceArn : payload.mail.sourceArn,
+                mailSendingAccountId : payload.mail.sendingAccountId,
+                mailMessageId : payload.mail.messageId,
+                mailDestination : payload.mail.destination[0],
+                
+                emailFromAddress : payload.mail.commonHeaders.from[0],
+                emailToAddress : payload.mail.destination[0],
+                emailSubject : payload.mail.commonHeaders.subject,
+                emailMessageId : payload.mail.commonHeaders.messageId,
+
+                
+            };
+        console.log("Bounce logic excecuted");
+        let entry = (Buffer.from(JSON.stringify(resultPayLoadBounce))).toString('utf8');
+        let result = entry + "\n";
+        const payload1 = (new Buffer.from(result, 'utf8')).toString('base64');
+            
+        
+        return{
+            recordId: record.recordId,
+            result: 'Ok',
+            data: payload1,
+        };
+        }
+        else if (payload.eventType == "Delivery") {
+            const resultPayLoadDelivery = {
+                eventType : payload.eventType,
+                
+                deliveryTimestamp : payload.delivery.timestamp,
+                deliveryProcessingTimeMillis : payload.delivery.processingTimeMillis,
+                deliveryRecipients : payload.delivery.recipients[0],
+                deliverySmtpResponse : payload.delivery.smtpResponse,
+                deliveryReportingMTA : payload.delivery.reportingMTA,
+                
+                mailTimestamp : payload.mail.timestamp,
+                mailSource : payload.mail["source"],
+                mailSourceArn : payload.mail.sourceArn,
+                mailSendingAccountId : payload.mail.sendingAccountId,
+                mailMessageId : payload.mail.messageId,
+                mailDestination : payload.mail.destination[0],
+                
+                emailFromAddress : payload.mail.commonHeaders.from[0],
+                emailToAddress : payload.mail.destination[0],
+                emailSubject : payload.mail.commonHeaders.subject,
+                emailMessageId : payload.mail.commonHeaders.messageId,
+                
+            };
+                console.log("Delivery logic excecuted");
+
+        let entry = (Buffer.from(JSON.stringify(resultPayLoadDelivery))).toString('utf8');
+        let result = entry + "\n";
+        const payload1 = (new Buffer.from(result, 'utf8')).toString('base64');
+            
+        
+        return{
+            recordId: record.recordId,
+            result: 'Ok',
+            data: payload1,
+        };
+        }
+        
+        else if (payload.eventType == "Send") {
+            const resultPayLoadSend = {
+                eventType : payload.eventType,
+                send : payload.send,
+                
+                mailTimestamp : payload.mail.timestamp,
+                mailSource : payload.mail["source"],
+                mailSourceArn : payload.mail.sourceArn,
+                mailSendingAccountId : payload.mail.sendingAccountId,
+                mailMessageId : payload.mail.messageId,
+                mailDestination : payload.mail.destination[0],
+                
+                emailFromAddress : payload.mail.commonHeaders.from[0],
+                emailToAddress : payload.mail.destination[0],
+                emailSubject : payload.mail.commonHeaders.subject,
+                emailMessageId : payload.mail.commonHeaders.messageId,
+
+                
+            };
+
+                console.log("Send logic excecuted");
+        let entry = (Buffer.from(JSON.stringify(resultPayLoadSend))).toString('utf8');
+        let result = entry + "\n";
+        const payload1 = (new Buffer.from(result, 'utf8')).toString('base64');
+        
+        
+        return{
+            recordId: record.recordId,
+            result: 'Ok',
+            data: payload1,
+        };
+        }
+        else if (payload.eventType == "Reject") {
+            const resultPayLoadReject = {
+                eventType : payload.eventType,
+                send : payload.send,
+                rejectReason : payload.reject.reason,
+                
+                mailTimestamp : payload.mail.timestamp,
+                mailSource : payload.mail["source"],
+                mailSourceArn : payload.mail.sourceArn,
+                mailSendingAccountId : payload.mail.sendingAccountId,
+                mailMessageId : payload.mail.messageId,
+                mailDestination : payload.mail.destination[0],
+                
+                emailFromAddress : payload.mail.commonHeaders.from[0],
+                emailToAddress : payload.mail.destination[0],
+                emailSubject : payload.mail.commonHeaders.subject,
+                emailMessageId : payload.mail.commonHeaders.messageId,
+
+                
+            };
+        console.log("Reject logic excecuted");
+        let entry = (Buffer.from(JSON.stringify(resultPayLoadReject))).toString('utf8');
+        let result = entry + "\n";
+        const payload1 = (new Buffer.from(result, 'utf8')).toString('base64');
+        
+        
+        return{
+            recordId: record.recordId,
+            result: 'Ok',
+            data: payload1,
+        };
+        }
+        else if (payload.eventType == "Complaint") {
+            const resultPayLoadComplaint = {
+                eventType : payload.eventType,
+                complaintComplainedRecipients : payload.complaint.complainedRecipients[0].emailAddress,
+                complaintTimestamp : payload.complaint.timestamp,
+                complaintFeedbackId : payload.complaint.feedbackId,
+                complaintUserAgent : payload.complaint["userAgent"],
+                complaintComplaintFeedbackType : payload.complaint.complaintFeedbackType,
+                complaintArrivalDate : payload.complaint.arrivalDate,
+
+                
+                mailTimestamp : payload.mail.timestamp,
+                mailSource : payload.mail["source"],
+                mailSourceArn : payload.mail.sourceArn,
+                mailSendingAccountId : payload.mail.sendingAccountId,
+                mailMessageId : payload.mail.messageId,
+                mailDestination : payload.mail.destination[0],
+                
+                emailFromAddress : payload.mail.commonHeaders.from[0],
+                emailToAddress : payload.mail.destination[0],
+                emailSubject : payload.mail.commonHeaders.subject,
+                emailMessageId : payload.mail.commonHeaders.messageId,
+
+                
+            };
+
+                console.log("Complaint logic excecuted");
+        let entry = (Buffer.from(JSON.stringify(resultPayLoadComplaint))).toString('utf8');
+        let result = entry + "\n";
+        const payload1 = (new Buffer.from(result, 'utf8')).toString('base64');
+        
+        
+        return{
+            recordId: record.recordId,
+            result: 'Ok',
+            data: payload1,
+        };
+        }
+        else if (payload.eventType == "Rendering Failure") {
+            const resultPayLoadRenderingFailure = {
+                eventType : payload.eventType,
+                failureTemplateName : payload.failure.templateName,
+                failureErrorMessage : payload.failure.errorMessage,
+
+                
+                mailTimestamp : payload.mail.timestamp,
+                mailSource : payload.mail["source"],
+                mailSourceArn : payload.mail.sourceArn,
+                mailSendingAccountId : payload.mail.sendingAccountId,
+                mailMessageId : payload.mail.messageId,
+                mailDestination : payload.mail.destination[0],
+                
+
+                
+            };
+
+                console.log("Rendering Failure logic excecuted");
+        let entry = (Buffer.from(JSON.stringify(resultPayLoadRenderingFailure))).toString('utf8');
+        let result = entry + "\n";
+        const payload1 = (new Buffer.from(result, 'utf8')).toString('base64');
+        
+        
+        return{
+            recordId: record.recordId,
+            result: 'Ok',
+            data: payload1,
+        };
+        }
+        else if (payload.eventType == "DeliveryDelay") {
+            const resultPayLoadDeliveryDelay = {
+                eventType : payload.eventType,
+                deliveryDelayTimestamp : payload.deliveryDelay.timestamp,
+                deliveryDelayDelayType : payload.deliveryDelay.delayType,
+                deliveryDelayExpirationTime : payload.deliveryDelay.expirationTime,
+                deliveryDelayDelayedRecipients : payload.deliveryDelay.delayedRecipients[0],
+                
+                mailTimestamp : payload.mail.timestamp,
+                mailSource : payload.mail["source"],
+                mailSourceArn : payload.mail.sourceArn,
+                mailSendingAccountId : payload.mail.sendingAccountId,
+                mailMessageId : payload.mail.messageId,
+                mailDestination : payload.mail.destination[0],
+                
+
+                
+            };
+
+
+                console.log("DeliveryDelay logic excecuted");
+        let entry = (Buffer.from(JSON.stringify(resultPayLoadDeliveryDelay))).toString('utf8');
+        let result = entry + "\n";
+        const payload1 = (new Buffer.from(result, 'utf8')).toString('base64');
+        
+        return{
+            recordId: record.recordId,
+            result: 'Ok',
+            data: payload1,
+        };
+        }
+        else if (payload.eventType == "Subscription") {
+            const resultPayLoadSubscription = {
+                eventType : payload.eventType,
+                subscriptionContactList : payload.subscription.contactList,
+                subscriptionTimestamp : payload.subscription.timestamp,
+                subscriptionSource : payload.subscription["source"],
+                subscriptionNewTopicPreferences : payload.subscription.newTopicPreferences,
+                
+                mailTimestamp : payload.mail.timestamp,
+                mailSource : payload.mail["source"],
+                mailSourceArn : payload.mail.sourceArn,
+                mailSendingAccountId : payload.mail.sendingAccountId,
+                mailMessageId : payload.mail.messageId,
+                mailDestination : payload.mail.destination[0],
+                
+                emailFromAddress : payload.mail.commonHeaders.from[0],
+                emailToAddress : payload.mail.destination[0],
+                emailSubject : payload.mail.commonHeaders.subject,
+                emailMessageId : payload.mail.commonHeaders.messageId,
+                emailReturnPath : payload.mail.commonHeaders.returnPath[0],
+                emailReplyTo : payload.mail.commonHeaders.replyTo[0],
+
+                
+            };
+
+                console.log("Subscription logic excecuted");
+        let entry = (Buffer.from(JSON.stringify(resultPayLoadSubscription))).toString('utf8');
+        let result = entry + "\n";
+        const payload1 = (new Buffer.from(result, 'utf8')).toString('base64');
+        
+        return{
+            recordId: record.recordId,
+            result: 'Ok',
+            data: payload1,
+        };
+        }
+    });
+    console.log("Output : " + JSON.stringify(output));
+    console.log(`Processing completed.  Successful records ${output.length}.`);
+    callback(null, { records: output });
+};
+                                
+                        </code></pre>
                         </div>
                         <a href="#email-etl-project">
                             <button id="emailId" onclick="toggleDropdown('email')" class="cami-btn">
