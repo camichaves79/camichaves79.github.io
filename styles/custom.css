@@ -27,7 +27,6 @@ html {
     margin: 0;
     padding: 0;
     background-color: rgba(0, 0, 0, 1);
-    overflow: scroll;
     scroll-behavior: smooth;
 }
 
@@ -158,11 +157,10 @@ p {
     word-wrap: break-word;
     padding-bottom: 1rem;
     margin-right: 1rem;
-    overflow-x: auto;
+    overflow: hidden;
 }
 
 #email-etl-project {
-    overflow-x: auto; /* Add scrollbars if content overflows */
     width: 85%;
     backdrop-filter: blur(5px);
     border-radius: 8px;
@@ -171,8 +169,11 @@ p {
     margin-bottom: 1.25rem;
     box-sizing: border-box;
     word-wrap: break-word;
+    overflow: hidden;
 }
-
+.code-code{
+    overflow: hidden;
+}
 
 /* ALL MEDIA QUERIES AT THE BOTTOM OF THE FILE */
 @media only screen and (max-width: 768px) {
