@@ -154,8 +154,6 @@ p {
 
 .code-block{
     width: 100%;
-    border-width: 3px;
-    border-color: red;
     white-space: pre-wrap;
     word-wrap: break-word;
     padding-bottom: 1rem;
