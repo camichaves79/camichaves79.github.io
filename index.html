@@ -160,9 +160,11 @@ def handle_delete(event):
     Delete an object from the email taken collection
     Arguments:
     event (dict) -- HTTP request data 
-    (a JSON-formatted document that contains data for a Lambda function to process).
+    (a JSON-formatted document that contains data for a 
+    Lambda function to process).
     Output:
-    Deletion prompt (str) -- Indicates if something was deleted or not
+    Deletion prompt (str) -- Indicates if something was 
+    deleted or not
     """
 
     collection = event["operation_context"]["database"]
@@ -183,9 +185,11 @@ def handle_patch(event):
     Edit the taken status of an email already in the DB
     Arguments:
     event (dict) -- HTTP request data 
-    (a JSON-formatted document that contains data for a Lambda function to process).
+    (a JSON-formatted document that contains data for 
+    a Lambda function to process).
     Output:
-    Updated prompt (str) -- Indicates if something was updated or not
+    Updated prompt (str) -- Indicates if something 
+    was updated or not
     """
     collection = event["operation_context"]["users"]
     query_filter = None
@@ -208,9 +212,11 @@ def handle_patch(event):
 
 def handle_post(event):
     """
-    Mark the taken status of an email by creting an object in the DB
+    Mark the taken status of an email by creting 
+    an object in the DB
     Arguments:
-    event (dict) -- HTTP request data (a JSON-formatted document that contains 
+    event (dict) -- HTTP request data (a 
+    JSON-formatted document that contains 
     data for a Lambda function to process).
     
     """
@@ -226,7 +232,9 @@ def handle_get(event):
     """
     Check if an email is taken or not
     Arguments:
-    event (dict) -- HTTP request data (a JSON-formatted document that contains data for a Lambda function to process).
+    event (dict) -- HTTP request data (a 
+    JSON-formatted document that contains data 
+    for a Lambda function to process).
     Output:
     Database object (dict) 
     """
@@ -240,10 +248,15 @@ def handle_get(event):
 def lambda_handler(event, context):
     """
     Point of entry to the AWS Lambda compute service.
-    This function is to be used to determine whether an email is in use or not by another user in the app
+    This function is to be used to determine 
+    whether an email is in use or not by another user in the app
     Arguments:
-    event (dict) -- HTTP request data (a JSON-formatted document that contains data for a Lambda function to process). 
-    context (dict) -- methods and properties that provide information about the invocation, function, and execution environment
+    event (dict) -- HTTP request data (a 
+    JSON-formatted document that contains 
+    data for a Lambda function to process). 
+    context (dict) -- methods and properties 
+    that provide information about the invocation, 
+    function, and execution environment
     
     Output:
     JSON-formated HTTP response
@@ -417,10 +430,12 @@ from botocore.exceptions import ClientError
 
 def get_secret() -> str:
     """
-    This helper function retrieves the secret needed for a future encription function
+    This helper function retrieves the secret 
+    needed for a future encription function
     """
 
-    # Set the name of the secret stored in the server and the chosen AWS region
+    # Set the name of the secret stored in the 
+    server and the chosen AWS region
     secret_name = "The name of the secret"
     region_name = "us-west-X"
 
@@ -443,7 +458,8 @@ def get_secret() -> str:
 
 def lambda_handler(event, context):
     """
-    This Lambda function is for knowkee users to sign-up with.
+    This Lambda function is for knowkee 
+    users to sign-up with.
     Input: ApiGateway event
     Output: HTTP response
     """
